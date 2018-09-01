@@ -1,0 +1,107 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" (ngSubmit)="form1()" #formone="ngForm">
+        <ng-template matStepLabel>Commit for Your Habit</ng-template>
+        <label>I commit to make	  </label>
+        <mat-form-field>
+          <input matInput placeholder="habit name" formControlName="firstCtrl" required>
+        </mat-form-field>      
+        &nbsp;
+         <label>as a habit. </label>
+      
+        <label>And I'm going to do this</label> &nbsp;&nbsp;
+        <mat-form-field>
+          <input type="number" matInput placeholder="days per week  " formControlName="daysPerWeek" required>
+        </mat-form-field>
+        <label>days per week for next 	</label>&nbsp;&nbsp;
+        <mat-form-field>
+          <input type="number" matInput placeholder="no of weeks "   formControlName="noOfWeeks" required>
+        </mat-form-field>
+        <label>.</label>
+  
+  
+        <div>
+          <button type="button" [disabled]="!formone.valid" style="background-color:blue; color:white;" mat-button matStepperNext>Proceed</button>
+          <!-- <button type="submit" mat-button>submit</button> -->
+        </div>
+      </form>
+    </mat-step>
+  
+  
+  
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup" (ngSubmit)="form2()" #formtwo="ngForm">
+        <ng-template matStepLabel>Where does my money go if I don't succeed?</ng-template>
+       
+        <div>
+            <label>
+                Recipient of Stakes:</label> &nbsp;&nbsp;
+            <mat-radio-group>
+                <mat-radio-button value="1" [checked]="true" >NGO</mat-radio-button>&nbsp;&nbsp;
+                <mat-radio-button value="2">A person I hate</mat-radio-button>
+              </mat-radio-group>
+              <br><br>
+              <mat-form-field>
+                  <input matInput placeholder="Enter Name" formControlName="secondCtrl" required>
+                </mat-form-field>
+              <!-- <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div> -->
+              <br><br>
+  
+              <mat-form-field>
+                  <input matInput type="number" placeholder="Amount on stake" formControlName="amount" required>
+                </mat-form-field>
+              <!-- <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div> -->
+              <br><br>
+  
+  
+              <label>
+                  You will be billed  for any reporting period if: 
+  
+                  <li> You report that you were unsuccessful </li>
+                  <li> Your Referee reports that you were unsuccessful </li>
+                 <li> You fail to make a required report by the end of the day.</li>
+                  
+                  
+                  
+                  All Stakes will be sent to your designated recipient.
+                   
+  
+              </label>
+              <br><br>
+          <button type="button" style="background-color:blue; color:white;" mat-button matStepperPrevious>Back</button>
+          <button type="button" [disabled]="!formtwo.valid" style="background-color:blue; color:white; margin-left:10px;" mat-button matStepperNext>Next</button>
+           <!-- <button type="submit" mat-button>submit</button> -->
+        </div>
+      </form>
+    </mat-step>
+  
+    <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup"   #formthree="ngForm">
+        <ng-template matStepLabel>Add a 3rd Umpire</ng-template>
+        You can add your 3rd umpire 
+  
+        <mat-form-field>
+            <input matInput placeholder="Person name" formControlName="umpire" required>
+          </mat-form-field>
+        <div>
+          <br><br>
+          <button type="button" style="background-color:blue; color:white;" mat-button matStepperPrevious>Back</button>
+          <button type="button" [disabled]="!formthree.valid" style="background-color:blue; color:white; margin-left:10px;" mat-button matStepperNext>Next</button>
+         
+        </div>
+      </form>
+      </mat-step>
+  
+    <mat-step>
+      <ng-template matStepLabel>Confirmation</ng-template>
+      Confirm and move forward to your commitment. 
+      <br> <br>
+      <div>
+        <button mat-button type="button" style="background-color:blue; color:white;" (click)="stepper.reset()">Reset</button>
+        <button mat-button type="button" [disabled]="!formthree.valid && !formtwo.valid && !formone.valid"  style="background-color:blue; color:white; margin-left:10px;" [disabled]="stepper.valid" (click)="formone.ngSubmit.emit();formtwo.ngSubmit.emit(); submitted();">
+          submit
+          </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+  
